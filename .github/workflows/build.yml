@@ -20,6 +20,4 @@ jobs:
       # with:
       #   args: 'get-login --no-include-email --region ${AWS_REGION}'
     - name: 'version'
-      env:
-        VERSION: ${echo ${{ github.ref }}//refs\/tags\/v/}
-      run: echo $VERSION
+      run: echo "${{ github.ref }}//refs\/tags\/v/"
