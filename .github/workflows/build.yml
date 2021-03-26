@@ -19,7 +19,7 @@ jobs:
     #     VERSION: ${{ github.ref }}
       # with:
       #   args: 'get-login --no-include-email --region ${AWS_REGION}'
-    - name: 'version'
-      env:
-        VERSION: "${{ github.ref }}"
-      run: echo "${$VERSION//refs\/tags\/v/}"
+    - name: 'get version'
+      run: ref=${{ github.ref }} && export version="${ref//refs\/tags\/v/}"
+    - name: 'print version'
+      run: echo $version
