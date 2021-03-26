@@ -20,4 +20,4 @@ jobs:
       # with:
       #   args: 'get-login --no-include-email --region ${AWS_REGION}'
     - name: 'version'
-      run: echo "${${{ github.ref }}//refs\/tags\/v/}"
+      run: message=${{ github.ref }} && echo "${message//refs\/tags\/v/}"
