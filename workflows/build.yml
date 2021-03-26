@@ -1,0 +1,23 @@
+name: Build and Publish Docker
+on:
+  release:
+    types:
+      - created
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: 'Get Login to AWS ECR'
+      id: ecr-login
+      uses: thalesvon/ecr-login@master
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_DEFAULT_OUTPUT: json
+        AWS_REGION: us-east-1
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        VERSION: ${{ github.ref }}
+      with:
+        args: 'get-login --no-include-email --region ${AWS_REGION}'
+    - name: 'version'
+      run: echo $VERSION
